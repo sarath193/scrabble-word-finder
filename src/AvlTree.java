@@ -1,9 +1,3 @@
-/**
- * Implements an AVL tree. Note that all "matching" is based on the compareTo
- * method.
- * 
- * @author Mark Allen Weiss
- */
 public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 	/**
 	 * Construct the tree.
@@ -22,35 +16,13 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		return 1 + size(root.left) + size(root.right);
 
 	}
-
-	/**
-	 * Insert into the tree; duplicates are ignored.
-	 * 
-	 * @param x
-	 *            the item to insert.
-	 */
 	public void insert(AnyType x) {
 		root = insert(x, root);
 	}
-
-	/**
-	 * Remove from the tree. Nothing is done if x is not found.
-	 * 
-	 * @param x
-	 *            the item to remove.
-	 */
 	public void remove(AnyType x) {
 		root = remove(x, root);
 	} 
-	/**
-	 * Internal method to remove from a subtree.
-	 * 
-	 * @param x
-	 *            the item to remove.
-	 * @param t
-	 *            the node that roots the subtree.
-	 * @return the new root of the subtree.
-	 */
+	
 	private AvlNode<AnyType> remove(AnyType x, AvlNode<AnyType> t) {
 		if (t == null)
 			return t; // Item not found; do nothing
@@ -98,19 +70,9 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 	public boolean contains(AnyType x) {
 		return contains(x, root);
 	}
-
-	/**
-	 * Make the tree logically empty.
-	 */
 	public void makeEmpty() {
 		root = null;
 	}
-
-	/**
-	 * Test if the tree is logically empty.
-	 * 
-	 * @return true if empty, false otherwise.
-	 */
 	public boolean isEmpty() {
 		return root == null;
 	}
@@ -292,21 +254,10 @@ public class AvlTree<AnyType extends Comparable<? super AnyType>> {
 		return k2;
 	}
 
-	/**
-	 * Double rotate binary tree node: first left child with its right child;
-	 * then node k3 with new left child. For AVL trees, this is a double
-	 * rotation for case 2. Update heights, then return new root.
-	 */
 	private AvlNode<AnyType> doubleWithLeftChild(AvlNode<AnyType> k3) {
 		k3.left = rotateWithRightChild(k3.left);
 		return rotateWithLeftChild(k3);
 	}
-
-	/**
-	 * Double rotate binary tree node: first right child with its left child;
-	 * then node k1 with new right child. For AVL trees, this is a double
-	 * rotation for case 3. Update heights, then return new root.
-	 */
 	private AvlNode<AnyType> doubleWithRightChild(AvlNode<AnyType> k1) {
 		k1.right = rotateWithLeftChild(k1.right);
 		return rotateWithRightChild(k1);
